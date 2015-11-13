@@ -1,11 +1,22 @@
 package assign10;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class ChainingHashTable implements Set<String> {
 	
+	ArrayList<LinkedList<String>> buckets;
+	HashFunctor hashFunctor;
+	int size;
+	
 	public ChainingHashTable(int capacity, HashFunctor functor) {
-		
+		buckets = new ArrayList<LinkedList<String>>(nextPrime(capacity));
+		for(@SuppressWarnings("unused") LinkedList<String> list : buckets) {
+			list = new LinkedList<String>();
+		}
+		hashFunctor = functor;
+		size = 0;
 	}
 	
 	/**
@@ -17,8 +28,15 @@ public class ChainingHashTable implements Set<String> {
 	 *         if the input item was actually inserted); otherwise, returns false
 	 */
 	public boolean add(String item) {
-		// TODO Auto-generated method stub
-		return false;
+		int index = hashFunctor.hash(item) % buckets.size();
+		if (buckets.get(index).contains(item)) {
+			return false;
+		}
+		
+		buckets.get(index).add(item);
+		size++;
+		
+		return true;
 	}
 
 	/**
@@ -31,8 +49,11 @@ public class ChainingHashTable implements Set<String> {
 	 *         otherwise, returns false
 	 */
 	public boolean addAll(Collection<? extends String> items) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean success = true;
+		for(String s : items) {
+			success = add(s) && success;
+		}
+		return success;
 	}
 
 	/**
@@ -40,8 +61,10 @@ public class ChainingHashTable implements Set<String> {
 	 * call.
 	 */
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		for(LinkedList<String> list : buckets) {
+			list.clear();
+		}
+		size = 0;
 	}
 
 	/**
@@ -54,8 +77,9 @@ public class ChainingHashTable implements Set<String> {
 	 *         item; otherwise, returns false
 	 */
 	public boolean contains(String item) {
-		// TODO Auto-generated method stub
-		return false;
+		int index = hashFunctor.hash(item) % buckets.size();
+		
+		return buckets.get(index).contains(item);
 	}
 
 	/**
@@ -68,23 +92,64 @@ public class ChainingHashTable implements Set<String> {
 	 *         in this set that is equal to it; otherwise, returns false
 	 */
 	public boolean containsAll(Collection<? extends String> items) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean success = true;
+		for(String s : items) {
+			success = contains(s) && success;
+		}
+		return success;
 	}
 
 	/**
 	 * Returns true if this set contains no items.
 	 */
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size == 0;
 	}
 
 	/**
 	 * Returns the number of items in this set.
 	 */
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
+	}
+	
+	/**
+	 * Next Prime
+	 * 
+	 * Finds the smallest prime number that is larger than the given integer value.
+ 	 * 
+ 	 * @param n The given integer value above which to test for primes.
+ 	 * @return The next smallest prime number, as an integer.
+ 	 */
+	public static int nextPrime(int n) {
+		//If n is positive, find the next smallest prime number
+		if(n > -1) {
+			if(n <= 1) {
+				return 2;
+			}
+			else {
+				boolean isPrime = false;
+				int num = n;
+				//Iterate through the integers, starting with n+1
+				while(!isPrime) {
+					//Test whether the number is prime
+					for(int j = 2; j < num; j++) {
+						if(num % j == 0) {
+							isPrime = false;
+							break;
+						}
+						else {
+							isPrime = true;
+						}
+					}
+					num++;
+				}
+				return num;
+			}
+		}
+		//Otherwise, return -1
+		else {
+			return -1;
+		}
 	}
 }
