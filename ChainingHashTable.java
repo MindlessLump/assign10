@@ -6,9 +6,9 @@ import java.util.LinkedList;
 
 public class ChainingHashTable implements Set<String> {
 	
-	ArrayList<LinkedList<String>> buckets;
-	HashFunctor hashFunctor;
-	int size;
+	private ArrayList<LinkedList<String>> buckets;
+	private HashFunctor hashFunctor;
+	private int size;
 	
 	public ChainingHashTable(int capacity, HashFunctor functor) {
 		buckets = new ArrayList<LinkedList<String>>(nextPrime(capacity));

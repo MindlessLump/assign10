@@ -4,9 +4,9 @@ import java.util.Collection;
 
 public class QuadProbeHashTable implements Set<String> {
 	
-	String[] arr;
-	HashFunctor hashFunctor;
-	int size;
+	private String[] arr;
+	private HashFunctor hashFunctor;
+	private int size;
 	
 	/** Constructs a hash table of the given capacity that uses the hashing function
 	 * specified by the given functor.
@@ -26,12 +26,11 @@ public class QuadProbeHashTable implements Set<String> {
 	 *         if the input item was actually inserted); otherwise, returns false
 	 */
 	public boolean add(String item) {
+		if(item == null)
+			return false;
 		int index = hashFunctor.hash(item) % arr.length;
 		for(int i = 1; true; i++) {
-			if(arr[index].equals(item)) {
-				return false;
-			}
-			if(arr[index].equals(null)) {
+			if(arr[index] == null) {
 				arr[index] = item;
 				size++;
 				//Make sure lambda is less than 0.5
@@ -39,6 +38,9 @@ public class QuadProbeHashTable implements Set<String> {
 					resize();
 				}
 				return true;
+			}
+			if(arr[index].equals(item)) {
+				return false;
 			}
 			index = (index + 2 * i - 1) % arr.length;
 		}
@@ -60,6 +62,13 @@ public class QuadProbeHashTable implements Set<String> {
 		}
 		return success;
 	}
+	
+	/**
+	 * Returns the capacity of the hash table.
+	 */
+	public int capacity() {
+		return arr.length;
+	}
 
 	/**
 	 * Removes all items from this set. The set will be empty after this method
@@ -80,13 +89,15 @@ public class QuadProbeHashTable implements Set<String> {
 	 *         item; otherwise, returns false
 	 */
 	public boolean contains(String item) {
+		if(item == null)
+			return false;
 		int index = hashFunctor.hash(item) % arr.length;
 		for(int i = 1; true; i++) {
+			if(arr[index] == null) {
+				return false;
+			}
 			if(arr[index].equals(item)) {
 				return true;
-			}
-			if(arr[index].equals(null)) {
-				return false;
 			}
 			index = (index + 2 * i - 1) % arr.length;
 		}
@@ -166,7 +177,7 @@ public class QuadProbeHashTable implements Set<String> {
 					}
 					num++;
 				}
-				return num;
+				return --num;
 			}
 		}
 		//Otherwise, return -1
