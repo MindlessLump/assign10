@@ -11,9 +11,10 @@ public class ChainingHashTable implements Set<String> {
 	private int size;
 	
 	public ChainingHashTable(int capacity, HashFunctor functor) {
-		buckets = new ArrayList<LinkedList<String>>(nextPrime(capacity));
-		for(@SuppressWarnings("unused") LinkedList<String> list : buckets) {
-			list = new LinkedList<String>();
+		int c = nextPrime(capacity);
+		buckets = new ArrayList<LinkedList<String>>(c);
+		for(int j = 0; j < c; j++) {
+			buckets.add(new LinkedList<String>());
 		}
 		hashFunctor = functor;
 		size = 0;
@@ -54,6 +55,13 @@ public class ChainingHashTable implements Set<String> {
 			success = add(s) && success;
 		}
 		return success;
+	}
+	
+	/**
+	 * Returns the storage capacity of the array
+	 */
+	public int capacity() {
+		return buckets.size();
 	}
 
 	/**
@@ -144,7 +152,7 @@ public class ChainingHashTable implements Set<String> {
 					}
 					num++;
 				}
-				return num;
+				return --num;
 			}
 		}
 		//Otherwise, return -1
