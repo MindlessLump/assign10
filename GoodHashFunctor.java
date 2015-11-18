@@ -10,6 +10,6 @@ public class GoodHashFunctor implements HashFunctor {
 
 	@Override
 	public int hash(String item) {
-		return item.hashCode();
+		return Math.abs(item.hashCode());
 	}
 }
