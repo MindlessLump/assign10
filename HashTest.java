@@ -194,6 +194,7 @@ public class HashTest {
 		}
 		assertEquals(bad.hash("H"), bad.hash("Hello"));
 		assertNotEquals(bad.hash("A"), bad.hash("a"));
+		assertEquals(bad.hash("A"), bad.hash("A"));
 	}
 	
 	//Test MediocreHashFunctor
@@ -210,11 +211,19 @@ public class HashTest {
 		assertNotEquals(med.hash("H"), med.hash("HA"));
 		assertNotEquals(med.hash("A"), med.hash("a"));
 		assertEquals(med.hash("ABC"), med.hash("CBA"));
+		assertEquals(med.hash("A"), med.hash("A"));
 	}
 	
 	//Test GoodHashFunctor
 	@Test
 	public void testGoodHashFunctor() {
+		GoodHashFunctor good = new GoodHashFunctor();
+		List<String> input = Arrays.asList("ABCDEFG", "qwerty", "HELLO WORLD");
+		assertNotEquals(good.hash(input.get(0)), good.hash(input.get(1)));
+		assertNotEquals(good.hash(input.get(1)), good.hash(input.get(2)));
+		assertNotEquals(good.hash(input.get(0)), good.hash(input.get(2)));
+		assertEquals(good.hash("A"), good.hash("A"));
+		
 		
 	}
 }
