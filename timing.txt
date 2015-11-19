@@ -22,7 +22,7 @@ N	T(N)	|	T(N)/1		T(N)/logN		T(N)/N		T(N)/NlogN		T(N)/N^2
 190000	1414E2	|	8062E0		7441E-4		4243E-5		8124E-8		8554E-8
 200000	1786E2	|	1014E1		8930E-4		5071E-5		1328E-7		2787E-7
 Insertions: 3150097
-Collisions: -259850379
+Collisions: 8330086875
 --------------------QuadProbeHashTable add() with a mediocre hashfunctor--------------------
 N	T(N)	|	T(N)/1		T(N)/logN		T(N)/N		T(N)/NlogN		T(N)/N^2
 10000	2388E0	|	1797E-1		2388E-4		1797E-5		2388E-8		-3283E-9
@@ -46,7 +46,7 @@ N	T(N)	|	T(N)/1		T(N)/logN		T(N)/N		T(N)/NlogN		T(N)/N^2
 190000	6442E1	|	3674E0		3391E-4		1934E-5		3702E-8		3898E-8
 200000	6479E1	|	3679E0		3239E-4		1840E-5		4816E-8		1011E-7
 Insertions: 3150097
-Collisions: -1715409426
+Collisions: 2580429726
 --------------------QuadProbeHashTable add() with a good hashfunctor--------------------
 N	T(N)	|	T(N)/1		T(N)/logN		T(N)/N		T(N)/NlogN		T(N)/N^2
 10000	3000E-1	|	2258E-2		3000E-5		2258E-6		3000E-9		-4124E-10
@@ -70,7 +70,7 @@ N	T(N)	|	T(N)/1		T(N)/logN		T(N)/N		T(N)/NlogN		T(N)/N^2
 190000	2400E-1	|	1369E-2		1263E-6		7203E-8		1379E-10		1452E-10
 200000	2560E-1	|	1454E-2		1280E-6		7269E-8		1903E-10		3994E-10
 Insertions: 3150097
-Collisions: 1354159
+Collisions: 1353249
 
 Experiment 2:
 --------------------QuadProbeHashTable add() with Java's hashfunctor--------------------

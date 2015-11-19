@@ -58,7 +58,7 @@ public class HashTimer {
 	 */
 	public static void doExperiment1Bad() {
 		int n = 0;
-		int collisions = 0;
+		long collisions = 0;
 		int insertions = 0;
 		Random r = new Random();
 		
@@ -110,7 +110,7 @@ public class HashTimer {
 	 */
 	public static void doExperiment1Mediocre() {
 		int n = 0;
-		int collisions = 0, insertions = 0;
+		long collisions = 0, insertions = 0;
 		Random r = new Random();
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
@@ -161,7 +161,7 @@ public class HashTimer {
 	 */
 	public static void doExperiment1Good() {
 		int n = 0;
-		int collisions = 0, insertions = 0;
+		long collisions = 0, insertions = 0;
 		Random r = new Random();
 		
 		for(n = startSize; n <= endSize; n += stepSize) {
