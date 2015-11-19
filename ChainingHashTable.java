@@ -36,7 +36,6 @@ public class ChainingHashTable implements Set<String> {
 		
 		buckets.get(index).add(item);
 		size++;
-		
 		return true;
 	}
 

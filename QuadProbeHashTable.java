@@ -7,6 +7,7 @@ public class QuadProbeHashTable implements Set<String> {
 	private String[] arr;
 	private HashFunctor hashFunctor;
 	private int size;
+	public int collisions, insertions;
 	
 	/** Constructs a hash table of the given capacity that uses the hashing function
 	 * specified by the given functor.
@@ -15,6 +16,8 @@ public class QuadProbeHashTable implements Set<String> {
 		arr = new String[nextPrime(capacity)];
 		hashFunctor = functor;
 		size = 0;
+		collisions = 0;
+		insertions = 0;
 	}
 
 	/**
@@ -37,12 +40,14 @@ public class QuadProbeHashTable implements Set<String> {
 				if(arr.length <= size*2) {
 					resize();
 				}
+				insertions++;
 				return true;
 			}
 			if(arr[index].equals(item)) {
 				return false;
 			}
 			index = (index + 2 * i - 1) % arr.length;
+			collisions++;
 		}
 	}
 
